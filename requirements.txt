@@ -5,3 +5,8 @@ mlflow
 scikit-learn
 matplotlib
 seaborn
+-e .
+psycopg2-binary
+python-dotenv
+xgboost
+catboost

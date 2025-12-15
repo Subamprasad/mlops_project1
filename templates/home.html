@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Performance Prediction</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        select,
+        input {
+            color-scheme: dark;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-950 text-white min-h-screen py-10 px-4 relative">
+
+    <div class="relative z-10 max-w-7xl mx-auto">
+        <div class="text-center mb-10">
+            <h1
+                class="text-4xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
+                Student Performance Predictor</h1>
+            <p class="text-gray-400">Predict Final Grade (G3) based on student attributes</p>
+        </div>
+
+        <form action="/predictdata" method="POST"
+            class="bg-gray-900/50 backdrop-blur-xl border border-white/10 rounded-2xl p-8 shadow-2xl">
+
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Personal Info -->
+                <div class="space-y-2">
+                    <label class="block text-xs font-bold text-gray-500 uppercase">School</label>
+                    <select name="school" required class="w-full bg-gray-800 rounded px-3 py-2 text-sm">
+                        <option value="GP">Gabriel Pereira</option>
+                        <option value="MS">Mousinho da Silveira</option>
+                    </select>
+                </div>
+                <div class="space-y-2">
+                    <label class="block text-xs font-bold text-gray-500 uppercase">Sex</label>
+                    <select name="sex" required class="w-full bg-gray-800 rounded px-3 py-2 text-sm">
+                        <option value="F">Female</option>
+                        <option value="M">Male</option>
+                    </select>
+                </div>
+                <div class="space-y-2">
+                    <label class="block text-xs font-bold text-gray-500 uppercase">Age</label>
+                    <input type="number" name="age" min="15" max="22" value="16" required
+                        class="w-full bg-gray-800 rounded px-3 py-2 text-sm">
+                </div>
+                <div class="space-y-2">
+                    <label class="block text-xs font-bold text-gray-500 uppercase">Address</label>
+                    <select name="address" required class="w-full bg-gray-800 rounded px-3 py-2 text-sm">
+                        <option value="U">Urban</option>
+                        <option value="R">Rural</option>
+                    </select>
+                </div>
+
+                <!-- Family Info -->
+                <div class="space-y-2">
+                    <label class="block text-xs font-bold text-gray-500 uppercase">Family Size</label>
+                    <select name="famsize" required class="w-full bg-gray-800 rounded px-3 py-2 text-sm">
+                        <option value="GT3">> 3</option>
+                        <option value="LE3">
+                            <= 3</option>
+                    </select>
+                </div>
+                <div class="space-y-2">
+                    <label class="block text-xs font-bold text-gray-500 uppercase">Parent Status</label>
+                    <select name="Pstatus" required class="w-full bg-gray-800 rounded px-3 py-2 text-sm">
+                        <option value="T">Together</option>
+                        <option value="A">Apart</option>
+                    </select>
+                </div>
+                <div class="space-y-2">
+                    <label class="block text-xs font-bold text-gray-500 uppercase">Mother's Edu</label>
+                    <select name="Medu" required class="w-full bg-gray-800 rounded px-3 py-2 text-sm">
+                        <option value="0">None</option>
+                        <option value="1">Primary</option>
+                        <option value="2">5th-9th</option>
+                        <option value="3">Secondary</option>
+                        <option value="4">Higher</option>
+                    </select>
+                </div>
+                <div class="space-y-2">
+                    <label class="block text-xs font-bold text-gray-500 uppercase">Father's Edu</label>
+                    <select name="Fedu" required class="w-full bg-gray-800 rounded px-3 py-2 text-sm">
+                        <option value="0">None</option>
+                        <option value="1">Primary</option>
+                        <option value="2">5th-9th</option>
+                        <option value="3">Secondary</option>
+                        <option value="4">Higher</option>
+                    </select>
+                </div>
+
+                <!-- Jobs -->
+                <div class="space-y-2">
+                    <label class="block text-xs font-bold text-gray-500 uppercase">Mother's Job</label>
+                    <select name="Mjob" required class="w-full bg-gray-800 rounded px-3 py-2 text-sm">
+                        <option value="other">Other</option>
+                        <option value="services">Services</option>
+                        <option value="at_home">At Home</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="health">Health</option>
+                    </select>
+                </div>
+                <div class="space-y-2">
+                    <label class="block text-xs font-bold text-gray-500 uppercase">Father's Job</label>
+                    <select name="Fjob" required class="w-full bg-gray-800 rounded px-3 py-2 text-sm">
+                        <option value="other">Other</option>
+                        <option value="services">Services</option>
+                        <option value="at_home">At Home</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="health">Health</option>
+                    </select>
+                </div>
+
+                <!-- Academic -->
+                <div class="space-y-2">
+                    <label class="block text-xs font-bold text-gray-500 uppercase">Reason</label>
+                    <select name="reason" required class="w-full bg-gray-800 rounded px-3 py-2 text-sm">
+                        <option value="course">Course</option>
+                        <option value="home">Home</option>
+                        <option value="reputation">Reputation</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="space-y-2">
+                    <label class="block text-xs font-bold text-gray-500 uppercase">Guardian</label>
+                    <select name="guardian" required class="w-full bg-gray-800 rounded px-3 py-2 text-sm">
+                        <option value="mother">Mother</option>
+                        <option value="father">Father</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="space-y-2">
+                    <label class="block text-xs font-bold text-gray-500 uppercase">Travel Time</label>
+                    <select name="traveltime" required class="w-full bg-gray-800 rounded px-3 py-2 text-sm">
+                        <option value="1">
+                            <15 min</option>
+                        <option value="2">15-30 min</option>
+                        <option value="3">30-60 min</option>
+                        <option value="4">>60 min</option>
+                    </select>
+                </div>
+                <div class="space-y-2">
+                    <label class="block text-xs font-bold text-gray-500 uppercase">Study Time</label>
+                    <select name="studytime" required class="w-full bg-gray-800 rounded px-3 py-2 text-sm">
+                        <option value="1">
+                            <2 hrs</option>
+                        <option value="2">2-5 hrs</option>
+                        <option value="3">5-10 hrs</option>
+                        <option value="4">>10 hrs</option>
+                    </select>
+                </div>
+                <div class="space-y-2">
+                    <label class="block text-xs font-bold text-gray-500 uppercase">Failures</label>
+                    <select name="failures" required class="w-full bg-gray-800 rounded px-3 py-2 text-sm">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+
+                <!-- Binary Yes/No -->
+                <div
+                    class="col-span-1 md:col-span-3 lg:col-span-4 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4 py-4 border-y border-white/10">
+                    <div class="space-y-1"><label class="text-xs text-gray-400">School Sup</label><select
+                            name="schoolsup" class="w-full bg-gray-800 text-xs px-2 py-1">
+                            <option value="no">No</option>
+                            <option value="yes">Yes</option>
+                        </select></div>
+                    <div class="space-y-1"><label class="text-xs text-gray-400">Fam Sup</label><select name="famsup"
+                            class="w-full bg-gray-800 text-xs px-2 py-1">
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select></div>
+                    <div class="space-y-1"><label class="text-xs text-gray-400">Paid Class</label><select name="paid"
+                            class="w-full bg-gray-800 text-xs px-2 py-1">
+                            <option value="no">No</option>
+                            <option value="yes">Yes</option>
+                        </select></div>
+                    <div class="space-y-1"><label class="text-xs text-gray-400">Activities</label><select
+                            name="activities" class="w-full bg-gray-800 text-xs px-2 py-1">
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select></div>
+                    <div class="space-y-1"><label class="text-xs text-gray-400">Nursery</label><select name="nursery"
+                            class="w-full bg-gray-800 text-xs px-2 py-1">
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select></div>
+                    <div class="space-y-1"><label class="text-xs text-gray-400">Higher Edu</label><select name="higher"
+                            class="w-full bg-gray-800 text-xs px-2 py-1">
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select></div>
+                    <div class="space-y-1"><label class="text-xs text-gray-400">Internet</label><select name="internet"
+                            class="w-full bg-gray-800 text-xs px-2 py-1">
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select></div>
+                    <div class="space-y-1"><label class="text-xs text-gray-400">Romantic</label><select name="romantic"
+                            class="w-full bg-gray-800 text-xs px-2 py-1">
+                            <option value="no">No</option>
+                            <option value="yes">Yes</option>
+                        </select></div>
+                </div>
+
+                <!-- Ratings -->
+                <div class="col-span-1 md:col-span-3 lg:col-span-4 grid grid-cols-2 lg:grid-cols-6 gap-4">
+                    <div class="space-y-1"><label class="text-xs text-gray-400">Fam Rel (1-5)</label><input
+                            type="number" name="famrel" min="1" max="5" value="4"
+                            class="w-full bg-gray-800 text-sm px-2 py-1"></div>
+                    <div class="space-y-1"><label class="text-xs text-gray-400">Free Time (1-5)</label><input
+                            type="number" name="freetime" min="1" max="5" value="3"
+                            class="w-full bg-gray-800 text-sm px-2 py-1"></div>
+                    <div class="space-y-1"><label class="text-xs text-gray-400">Go Out (1-5)</label><input type="number"
+                            name="goout" min="1" max="5" value="3" class="w-full bg-gray-800 text-sm px-2 py-1"></div>
+                    <div class="space-y-1"><label class="text-xs text-gray-400">Dalc (1-5)</label><input type="number"
+                            name="Dalc" min="1" max="5" value="1" class="w-full bg-gray-800 text-sm px-2 py-1"></div>
+                    <div class="space-y-1"><label class="text-xs text-gray-400">Walc (1-5)</label><input type="number"
+                            name="Walc" min="1" max="5" value="1" class="w-full bg-gray-800 text-sm px-2 py-1"></div>
+                    <div class="space-y-1"><label class="text-xs text-gray-400">Health (1-5)</label><input type="number"
+                            name="health" min="1" max="5" value="5" class="w-full bg-gray-800 text-sm px-2 py-1"></div>
+                </div>
+
+                <!-- Grades & Absences -->
+                <div
+                    class="col-span-1 md:col-span-3 lg:col-span-4 grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-white/10">
+                    <div class="space-y-2">
+                        <label class="block text-xs font-bold text-gray-500 uppercase">Absences</label>
+                        <input type="number" name="absences" min="0" max="93" value="4" required
+                            class="w-full bg-gray-800 rounded px-3 py-2 text-sm">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="block text-xs font-bold text-blue-400 uppercase">G1 Score (0-20)</label>
+                        <input type="number" name="G1" min="0" max="20" value="10" required
+                            class="w-full bg-gray-800 border-blue-500/50 rounded px-3 py-2 text-sm">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="block text-xs font-bold text-blue-400 uppercase">G2 Score (0-20)</label>
+                        <input type="number" name="G2" min="0" max="20" value="10" required
+                            class="w-full bg-gray-800 border-blue-500/50 rounded px-3 py-2 text-sm">
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Submit -->
+            <div class="mt-8 flex justify-end">
+                <button type="submit"
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg shadow-blue-500/20">
+                    Predict Final Grade
+                </button>
+            </div>
+        </form>
+
+        {% if results %}
+        <div class="mt-8 p-6 bg-green-500/10 border border-green-500/20 rounded-2xl flex items-center justify-between">
+            <div>
+                <h2 class="text-xl font-semibold text-green-400">Prediction Result</h2>
+                <p class="text-gray-400">The predicted G3 score is:</p>
+            </div>
+            <div class="text-5xl font-bold text-white bg-green-600 py-3 px-8 rounded-xl shadow-lg">
+                {{ results | round(2) }}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>
