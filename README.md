@@ -1,4 +1,4 @@
-# Student Performance Prediction MLOps Project
+# Student Grade Prediction System
 
 This is an end-to-end Machine Learning project to predict student performance (Final Grade G3) based on various demographic and academic attributes from the Portuguese school dataset.
 
